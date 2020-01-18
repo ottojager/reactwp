@@ -1,26 +1,30 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import Nav from './Nav';
+import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
+import PageContent from './PageContent';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+
+  render() {
+    return (
+      <div>  
+        <BrowserRouter>
+        <div className="grid-container">
+          <div className="grid-x">
+            <img src={logo} alt="logo" className="cell small-2" />
+            <Nav />
+          </div>
+        </div>
+        <Switch>
+          <Redirect from='/' to='/medicore' exact />
+          <Route path='/:pagename' component={PageContent} />
+        </Switch>
+        </BrowserRouter>
+      </div>
+    )
+  }
 }
 
 export default App;
