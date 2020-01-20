@@ -1,0 +1,30 @@
+// Override default variables before the import
+$body-bg: #fff;
+
+// Import Bootstrap and its default variables
+@import '~bootstrap/scss/bootstrap.scss';
+
+// Custom styling
+
+nav.navbar.navbar-expand {
+    .navbar-nav {
+        .nav-item {
+            padding: 0 1rem 0 1rem;
+
+            .dropdown, .dropdown-toggle {
+                display: inline;
+                padding: 0;
+
+                .dropdown-menu {
+                    position: relative;
+                    border: 0;
+
+                    a {
+                        display: block;
+                        border: 1px solid rgba(0, 0, 0, 0.15);
+                    }
+                }
+            }
+        }
+    }
+}

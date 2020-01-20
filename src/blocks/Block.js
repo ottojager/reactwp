@@ -25,7 +25,7 @@ class Block extends React.Component {
         //console.log(this.props.block);
         let rowlayout = this.props.block.acf_fc_layout;
         return (
-            <div className="block grid-x">
+            <div className="block">
                 {this.getRow(rowlayout)}
             </div>
         )

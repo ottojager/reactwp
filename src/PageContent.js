@@ -2,21 +2,19 @@ import React from 'react';
 import Block from './blocks/Block';
 
 class PageContent extends React.Component {
-    constructor(props) {
-        super(props);
-        // Bind this so we can use this.setState().
-        this.state = {
-            pages  : [],
-            pageName : ''
-        };
+
+    state = {
+        pages    : [],
+        pageName : '',
+        loading  : false
     }
 
     componentDidMount() {
-        this.setState({pageName: this.props.match.params.pagename})
+        this.setState({loading:true, pageName: this.props.match.params.pagename})
         fetch('http://localhost:80/medicore/wp-json/wp/v2/pages')
          .then(data => data.json())
          .then(data => {
-            this.setState(({pages: data}));
+            this.setState(({pages: data, loading:false}));
         })
          .catch((error) => {
             console.error(error);
@@ -29,7 +27,7 @@ class PageContent extends React.Component {
         }
       }
     
-      onRouteChanged() {
+    onRouteChanged() {
         if (this.updateTimer) return;
         this.setState({ pageName: this.props.match.params.pagename });
         this.updateTimer = setTimeout(() => {
@@ -39,7 +37,9 @@ class PageContent extends React.Component {
       }
 
     render() {
-        return (
+        // als this.state.pageName niet voorkomt in this.state.pages, dan 404
+        if (this.state.loading) { return <div className="container">Loading...</div> }
+        else return (
             this.state.pages.map((page, index) => {
                 if (page.slug === this.state.pageName || (this.state.pageName === 'medicore' && page.slug === 'home')) {
                     if (page.acf.blocks) {
@@ -54,9 +54,9 @@ class PageContent extends React.Component {
                             </div>
                         )
                     }
-                    else return null; 
+                    else return null
                 }
-                else return null;       
+                else return null
             })   
         )
     }

@@ -1,9 +1,10 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import Nav from './Nav';
+import Menu from './Nav';
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import PageContent from './PageContent';
+import Contact from './blocks/Contact';
 
 class App extends React.Component {
 
@@ -11,14 +12,15 @@ class App extends React.Component {
     return (
       <div>  
         <BrowserRouter>
-        <div className="grid-container">
-          <div className="grid-x">
-            <img src={logo} alt="logo" className="cell small-2" />
-            <Nav />
+        <header className="container">
+          <div className="row">
+            <img src={logo} alt="logo" className="col-sm-2" />
+            <Menu />
           </div>
-        </div>
+        </header>
         <Switch>
           <Redirect from='/' to='/medicore' exact />
+          <Route path='/contact' component={Contact} />
           <Route path='/:pagename' component={PageContent} />
         </Switch>
         </BrowserRouter>

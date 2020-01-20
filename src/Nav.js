@@ -1,7 +1,10 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom'; 
+import Navbar  from 'react-bootstrap/Navbar';
+import NavDropdown from 'react-bootstrap/NavDropdown';
+import Nav from 'react-bootstrap/Nav';
 
-class Nav extends React.Component {
+class Menu extends React.Component {
     constructor(props) {
         super(props);
         // Bind this so we can use this.setState().
@@ -27,24 +30,33 @@ class Nav extends React.Component {
 
     render() {
       return (
-        <div className="cell medium-10">
+        <div className="col-md-10">
         {this.state.navLoading 
             ? "Loading..."
-            : <nav className="float-right">
-                <ul className="menu">
+            : <Navbar>
+                <Nav>
                 {this.state.nav.map((menuitem, index) => {
-                    return (
-                        <li key={index}>
-                        <NavLink to={menuitem.slug} activeClassName='active'>{menuitem.title}</ NavLink>
-                        </li>
+                    let submenu = null;
+                    if (menuitem.child_items) {
+                        submenu = <NavDropdown>
+                            {menuitem.child_items.map((child) => {
+                                return <NavLink key={child.ID} to={child.slug}>{child.title}</NavLink>
+                            })}
+                        </NavDropdown>
+                    }
+                    return (  
+                        <Nav.Item>
+                            <NavLink to={menuitem.slug} activeClassName='active'>{menuitem.title}</NavLink>
+                            {submenu}
+                        </Nav.Item>
                     )
                 })}
-                </ul>
-            </nav>
+                </Nav>
+              </Navbar>
         }
         </div>
         )
     }
 }
 
-export default Nav;
+export default Menu;
