@@ -5,7 +5,7 @@ import Overonsbanner from './Overonsbanner';
 import Overonsteksten from './Overonsteksten';
 
 class Block extends React.Component {
-
+    // getRow method returns correct component for all acf_fc_layout names
     getRow = row => {
         switch(row) {
           case 'home_banner':

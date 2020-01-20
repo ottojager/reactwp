@@ -11,6 +11,7 @@ class PageContent extends React.Component {
 
     componentDidMount() {
         this.setState({loading:true, pageName: this.props.match.params.pagename})
+        // fetch WordPress page data from WP REST API
         fetch('http://localhost:80/medicore/wp-json/wp/v2/pages')
          .then(data => data.json())
          .then(data => {
@@ -37,9 +38,8 @@ class PageContent extends React.Component {
       }
 
     render() {
-        // als this.state.pageName niet voorkomt in this.state.pages, dan 404
         if (this.state.loading) { return <div className="container">Loading...</div> }
-        else return (
+        else return ( // map through pages and return title and ACF blocks
             this.state.pages.map((page, index) => {
                 if (page.slug === this.state.pageName || (this.state.pageName === 'medicore' && page.slug === 'home')) {
                     if (page.acf.blocks) {
@@ -48,6 +48,7 @@ class PageContent extends React.Component {
                                 <h1>{page.title.rendered}</h1>
                                 <div>
                                 {page.acf.blocks.map((block, index) => {
+                                    // get Block component for each ACF block
                                     return <Block key={index} block={block} />
                                 })}
                                 </div>

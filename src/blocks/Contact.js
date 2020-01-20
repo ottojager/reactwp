@@ -18,16 +18,16 @@ class Contact extends React.Component {
 
   render() {
     return (
-        <div className="grid-container">
+        <div className="container contact">
             <h1>Contact</h1>
-            <form action="" onSubmit={this.submit} className="grid-x grid-margin-x">
-                <fieldset className="cell medium-6">
+            <form action="" onSubmit={this.submit} className="row">
+                <fieldset className="col-md-6">
                     <label htmlFor="name">Naam:</label>
                     <input type="text" id="name" name="name" onChange={this.inputName} />
                     <label htmlFor="email">E-mail:</label>
                     <input type="email" id="email" name="email" onChange={this.inputEmail} />
                 </fieldset>
-                <fieldset className="cell medium-6">
+                <fieldset className="col-md-6">
                     <label htmlFor="message">Uw bericht:</label>
                     <textarea rows="4" id="message" name="message" onChange={this.inputMessage} />
                 </fieldset>

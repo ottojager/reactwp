@@ -8,10 +8,12 @@ class Overonsteksten extends React.Component {
     this.tekst1 = this.teksten.over_ons_teksten_1;
     this.tekst2 = this.teksten.over_ons_teksten_2;
     return (
-        <div>
+      <div className="container">
+        <div className="row">
           <p>{this.tekst1}</p>
           <p>{this.tekst2}</p>
         </div>
+      </div>
     )
   }
 }

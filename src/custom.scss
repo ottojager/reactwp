@@ -6,6 +6,7 @@ $body-bg: #fff;
 
 // Custom styling
 
+// Navbar
 nav.navbar.navbar-expand {
     .navbar-nav {
         .nav-item {
@@ -27,4 +28,15 @@ nav.navbar.navbar-expand {
             }
         }
     }
+}
+
+// Contact form
+.contact form {
+    fieldset {
+        label, input, textarea {
+            display: block;
+            width: 100%;
+        }
+    }
+
 }

@@ -17,10 +17,11 @@ class Menu extends React.Component {
     }
     componentDidMount() {
         this.setState({navLoading: true})
+        // fetch WordPress menu data; use e.g. WP-REST-API V2 Menus
          fetch('http://localhost:80/medicore/wp-json/menus/v1/menus/main')
          .then(data => data.json())
          .then(data => {
-             //console.log(data.items);
+             //console.log(data.items); // to test if the data is correctly fetched
             this.setState(({nav: data.items, navLoading: false}));
         })
        .catch((error) => {
@@ -35,16 +36,17 @@ class Menu extends React.Component {
             ? "Loading..."
             : <Navbar>
                 <Nav>
-                {this.state.nav.map((menuitem, index) => {
+                {// map the menu data
+                this.state.nav.map((menuitem, index) => {
                     let submenu = null;
-                    if (menuitem.child_items) {
+                    if (menuitem.child_items) { // if item has child items, map and return child item nav links
                         submenu = <NavDropdown>
                             {menuitem.child_items.map((child) => {
                                 return <NavLink key={child.ID} to={child.slug}>{child.title}</NavLink>
                             })}
                         </NavDropdown>
                     }
-                    return (  
+                    return (  // return main nav links
                         <Nav.Item>
                             <NavLink to={menuitem.slug} activeClassName='active'>{menuitem.title}</NavLink>
                             {submenu}
